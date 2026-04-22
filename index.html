@@ -1407,32 +1407,20 @@ function mfSubmit() {
   document.getElementById('mfSubmitBtn').style.display = 'none';
   document.getElementById('mfSubmitting').style.display = 'block';
 
-  // ======================================================
   // GOOGLE SHEETS INTEGRATION
-  // Replace the URL below with your deployed Google Apps Script URL.
-  // See the setup guide for instructions on creating this.
-  // ======================================================
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4_Jao_i2hpn09T6AyHgKzyiDSD_W_U3Yo66DfW3ezan3SBSsFi8LHIxT_i_ijYBHeYg/exec';
 
-  if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycby4_Jao_i2hpn09T6AyHgKzyiDSD_W_U3Yo66DfW3ezan3SBSsFi8LHIxT_i_ijYBHeYg/exec') {
-    // Beta mode — no backend connected yet. Log and show success.
-    console.log('MRPOA Membership [BETA — not submitted to sheet]:', JSON.stringify(data, null, 2));
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(() => mfShowSuccess(data, fee))
+  .catch(err => {
+    console.error('Submission error:', err);
     mfShowSuccess(data, fee);
-  } else {
-    // Production mode — POST to Google Sheets
-    fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(() => mfShowSuccess(data, fee))
-    .catch(err => {
-      console.error('Submission error:', err);
-      // Still show success — data logged to console as fallback
-      mfShowSuccess(data, fee);
-    });
-  }
+  });
 }
 
 function mfShowSuccess(data, fee) {
@@ -1450,4 +1438,3 @@ function mfShowSuccess(data, fee) {
 </script>
 </body>
 </html>
-
