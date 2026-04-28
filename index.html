@@ -561,6 +561,12 @@ body {
 
 .sponsor:hover .sponsor-logo { opacity: 1; }
 
+.sponsor-logo.bedrock-logo {
+  filter: none;
+  height: 70px;
+  border-radius: 8px;
+}
+
 .sponsor-logo.potentia {
   filter: brightness(10);
   height: 50px;
@@ -877,7 +883,7 @@ body {
       <div class="event-date"><div class="month">Jul</div><div class="day">4</div></div>
       <div class="event-info">
         <h4>Fishing Derby</h4>
-        <p>Sunrise to 10 AM around the Moon River. MRPOA boat parked by the weed bed near Jaspen Park. Sponsored by Bedrock Landscapes.</p>
+        <p>Sunrise to 10 AM around the Moon River. MRPOA boat parked by the weed bed near Jaspen Park. Sponsored by Bedrock Landscaping.</p>
         <span class="event-tag sport">Sport</span>
       </div>
     </div>
@@ -1089,9 +1095,14 @@ body {
       <div class="mf-price-box">
         <div class="mf-price" id="mfPrice">$40</div>
         <div class="mf-price-note" id="mfPriceNote">Early bird rate — before May 31</div>
+        <div id="mfPriceBreakdown" style="display:none; margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid rgba(255,255,255,0.15); font-size:0.82rem; color:rgba(255,255,255,0.7);">
+          <div style="display:flex;justify-content:space-between;"><span>Membership:</span><span id="mfBreakMembership">$40</span></div>
+          <div style="display:flex;justify-content:space-between;margin-top:0.25rem;"><span>Jazz Cruise Donation:</span><span id="mfBreakJazz">$0</span></div>
+          <div style="display:flex;justify-content:space-between;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid rgba(255,255,255,0.15);font-weight:700;color:white;font-size:0.95rem;"><span>Total Due:</span><span id="mfBreakTotal">$40</span></div>
+        </div>
       </div>
 
-      <div class="mf-group"><label>Jazz Cruise Donation (optional)</label><input type="number" id="mf-jazz" min="0" placeholder="$0" style="max-width:160px;"></div>
+      <div class="mf-group"><label>Jazz Cruise Donation (optional)</label><input type="number" id="mf-jazz" min="0" placeholder="$0" style="max-width:160px;" oninput="mfUpdateTotal()"></div>
 
       <div class="mf-group" style="margin-top:1.25rem;">
         <label>Payment Method <span class="mf-req">*</span></label>
@@ -1153,8 +1164,8 @@ body {
   <div class="sponsors-row">
     <a href="http://www.bedrocklandscapes.com/" target="_blank" style="text-decoration:none;">
       <div class="sponsor fade-in">
-        <img src="https://static.wixstatic.com/media/221bf5_8ed0bee3075f45aa87b83be5c8462920~mv2.jpeg/v1/fill/w_400,h_247,al_c,q_80/bedrockadlogo.jpeg" alt="Bedrock Landscapes logo" class="sponsor-logo">
-        <h4>Bedrock Landscapes</h4>
+        <img src="data:image/png;base64,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" alt="Bedrock Landscaping logo" class="sponsor-logo bedrock-logo">
+        <h4>Bedrock Landscaping</h4>
         <p>Natural rock landscaping, proudly serving Muskoka from Bala</p>
         <div class="sponsor-event">&#127907; Fishing Derby Sponsor</div>
         <span class="sponsor-link">bedrocklandscapes.com &rarr;</span>
@@ -1336,9 +1347,34 @@ const mfIsEarlyBird = new Date().getMonth() < 5 || (new Date().getMonth() === 4 
 (function() {
   const p = document.getElementById('mfPrice');
   const n = document.getElementById('mfPriceNote');
-  if (mfIsEarlyBird) { p.textContent = '$40'; n.textContent = 'Early bird rate — before May 31'; }
-  else { p.textContent = '$50'; n.textContent = 'Standard rate — after June 1'; }
+  const bm = document.getElementById('mfBreakMembership');
+  const bt = document.getElementById('mfBreakTotal');
+  const fee = mfIsEarlyBird ? 40 : 50;
+  p.textContent = '$' + fee;
+  bm.textContent = '$' + fee;
+  bt.textContent = '$' + fee;
+  if (mfIsEarlyBird) { n.textContent = 'Early bird rate — before May 31'; }
+  else { n.textContent = 'Standard rate — after June 1'; }
 })();
+
+function mfUpdateTotal() {
+  const fee = mfIsEarlyBird ? 40 : 50;
+  const jazz = parseInt(document.getElementById('mf-jazz').value) || 0;
+  const total = fee + jazz;
+  const breakdown = document.getElementById('mfPriceBreakdown');
+  const priceEl = document.getElementById('mfPrice');
+
+  if (jazz > 0) {
+    breakdown.style.display = 'block';
+    document.getElementById('mfBreakMembership').textContent = '$' + fee;
+    document.getElementById('mfBreakJazz').textContent = '$' + jazz;
+    document.getElementById('mfBreakTotal').textContent = '$' + total;
+    priceEl.textContent = '$' + total;
+  } else {
+    breakdown.style.display = 'none';
+    priceEl.textContent = '$' + fee;
+  }
+}
 
 function mfGo(step) {
   // Validate step 1
@@ -1428,11 +1464,15 @@ function mfShowSuccess(data, fee) {
   document.getElementById('mfSuccess').classList.add('active');
   document.querySelector('.form-steps').style.display = 'none';
 
+  const jazz = parseInt(data.jazzDonation) || 0;
+  const total = fee + jazz;
+  const breakdown = jazz > 0 ? ' (Membership: $' + fee + ' + Jazz Cruise Donation: $' + jazz + ')' : '';
+
   const r = document.getElementById('mfPayReminder');
   if (data.paymentMethod === 'etransfer') {
-    r.textContent = 'Please send your e-Transfer of $' + fee + ' to mrpoa.membership@gmail.com';
+    r.innerHTML = 'Please send your e-Transfer of <strong>$' + total + '</strong> to mrpoa.membership@gmail.com' + breakdown;
   } else {
-    r.textContent = 'Please mail your cheque for $' + fee + ' to PO Box 157, Bala ON P0C 1A0';
+    r.innerHTML = 'Please mail your cheque for <strong>$' + total + '</strong> to PO Box 157, Bala ON P0C 1A0' + breakdown;
   }
 }
 </script>
